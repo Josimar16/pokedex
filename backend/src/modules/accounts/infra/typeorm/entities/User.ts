@@ -1,4 +1,5 @@
 import {Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn} from 'typeorm';
+import {v4 as uuid} from 'uuid';
 
 @Entity({ schema: 'auth' })
 export class User {
@@ -25,4 +26,10 @@ export class User {
 
     @UpdateDateColumn({nullable: true, select: false})
     updated_at?: Date;
+
+    constructor() {
+        if (!this.id) {
+            this.id = uuid();
+        }
+    }
 }
