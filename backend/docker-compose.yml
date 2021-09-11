@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  postgres:
+    container_name: pokedex-postgres
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ~/PostgreSQL:/var/lib/postgresql/data
+    networks:
+      - pokedex-postgres-network
+
+  pgadmin:
+    container_name: pokedex-pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "pokedex@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "pokedex-pass"
+    ports:
+      - "9000:80"
+    depends_on:
+      - postgres
+    networks:
+      - pokedex-postgres-network
+networks:
+  pokedex-postgres-network:
+    name: pokedex-postgres-network
+    driver: bridge
