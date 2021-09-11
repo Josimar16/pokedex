@@ -1,4 +1,4 @@
-export class Response {
+export class AppResponse {
     public readonly cod?: number;
     public readonly message: string;
     public readonly data?: any;
