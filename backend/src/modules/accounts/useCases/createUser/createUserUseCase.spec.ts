@@ -1,33 +1,42 @@
 import {CreateUserUseCase} from "./createUserUseCase";
-import {UsersRepository} from "../../infra/typeorm/repositories/UsersRepository";
-import {BCryptHashProvider} from "../../providers/HashProvider/implementations/BCryptHashProvider";
-import {Test} from "@nestjs/testing";
+import {FakeUsersRepository} from "../../repositories/fakes/FakeUsersRepository";
+import {FakeHashProvider} from "../../providers/HashProvider/fakes/FakeHashProvider";
+
+let createUserUseCase: CreateUserUseCase;
+let usersRepository: FakeUsersRepository;
+let hashProvider: FakeHashProvider;
 
 describe('CreateUserUseCase', () => {
-    let createUserUseCase: CreateUserUseCase;
-    let usersRepository: UsersRepository;
-    let hashProvider: BCryptHashProvider;
-
     beforeEach(async () => {
-        const moduleRef = await Test.createTestingModule({
-            providers: [
-                UsersRepository,
-                BCryptHashProvider,
-                CreateUserUseCase
-            ]
-        }).compile();
-
-        usersRepository = moduleRef.get<UsersRepository>(UsersRepository);
-        hashProvider = moduleRef.get<BCryptHashProvider>(BCryptHashProvider);
-        createUserUseCase = moduleRef.get<CreateUserUseCase>(CreateUserUseCase);
+        usersRepository = new FakeUsersRepository();
+        hashProvider = new FakeHashProvider();
+        createUserUseCase = new CreateUserUseCase(
+            usersRepository,
+            hashProvider
+        );
     });
 
     it('should be able create a new user', async () => {
-        await jest.spyOn(usersRepository, 'create').mockImplementation();
-
-        await expect(await createUserUseCase.execute({
+        const response = await createUserUseCase.execute({
             name: 'John Due',
             email: 'john@gmail.com'
-        })).toHaveProperty('id');
-    })
+        })
+        await expect(response.data).toHaveProperty('id');
+        await expect(response.data.email).toEqual('john@gmail.com');
+        await expect(response.cod).toEqual(201);
+    });
+
+    it('should not be able create a new user, because email already exists', async () => {
+        await usersRepository.create({
+            name: 'John Due',
+            email: 'john@gmail.com',
+            password: '123456'
+        });
+        const response = await createUserUseCase.execute({
+            name: 'John Due',
+            email: 'john@gmail.com'
+        });
+        await expect(response.cod).toEqual(400);
+        await expect(response.message).toEqual('Usuário já existe com esse email');
+    });
 })

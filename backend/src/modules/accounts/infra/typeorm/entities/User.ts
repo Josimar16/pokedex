@@ -30,6 +30,7 @@ export class User {
     constructor() {
         if (!this.id) {
             this.id = uuid();
+            this.created_at = new Date();
         }
     }
 }
