@@ -1,8 +1,9 @@
 import {ICreateUserDTO} from "../../../dtos/ICreateUserDTO";
 import {User} from "../entities/User";
 import {IUsersRepository} from "../../../repositories/IUsersRepository";
-import {EntityManager, Repository} from "typeorm";
+import {EntityManager, EntityRepository, Repository} from "typeorm";
 
+@EntityRepository(User)
 export class UsersRepository implements IUsersRepository{
     private ormRepository: Repository<User>;
 

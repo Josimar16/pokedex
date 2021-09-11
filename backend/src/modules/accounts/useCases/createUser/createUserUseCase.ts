@@ -2,10 +2,14 @@ import {ICreateUserDTO} from "../../dtos/ICreateUserDTO";
 import {IUsersRepository} from "../../repositories/IUsersRepository";
 import {AppResponse} from "../../../../shared/responses/AppResponse";
 import {IHashProvider} from "../../providers/HashProvider/models/IHashProvider";
+import {Inject, Injectable} from "@nestjs/common";
 
+@Injectable()
 export class CreateUserUseCase {
     constructor(
+        @Inject('UsersRepository')
         private readonly usersRepository: IUsersRepository,
+        @Inject('HashProvider')
         private readonly hashProvider: IHashProvider
     ) {}
 

@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 import connection from './shared/infra/typeorm';
+import {AccountsModule} from "./modules/accounts/accounts.module";
 
 @Module({
   imports: [
@@ -14,7 +15,9 @@ import connection from './shared/infra/typeorm';
         inject: [ConfigService],
         useFactory: (config: ConfigService) =>
             config.get<TypeOrmModuleOptions>('database'),
-      })
+      }),
+
+      AccountsModule
   ],
 })
 export class AppModule {}
