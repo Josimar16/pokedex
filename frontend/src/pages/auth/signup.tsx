@@ -120,7 +120,7 @@ export default function SignUp() {
                     >
                         Entre conosco nessa e seja o "treinador"<br />
                         de um Pokémon, isso se ele gostar<br />
-                        de você, vale a pena correr o risco.
+                        de você, vale a pena correr o risco. 💨 🚀
                     </Text>
 
                     <Flex flexDirection="column" justifyContent="center">
