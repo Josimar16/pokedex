@@ -8,10 +8,11 @@ services:
   server:
     build: ./backend
     image: pokedex/backend
-    container_name: pokedex-backend
+    container_name: pokedexserver
     restart: always
     environment:
       - APP_PORT=3333
+      - BASE_URL=/pokedex/api
       - DATABASE_PORT=5432
       - DATABASE_HOST=postgres
       - DATABASE_USERNAME=pokedex-user
