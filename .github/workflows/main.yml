@@ -25,8 +25,8 @@ jobs:
           port: ${{ secrets.PORT }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          source: "., !node_modules"
-          target: "app/rentx-concessionaire"
+          source: "./backend, !node_modules, !dist"
+          target: "app/pokedex"
           
       - name: Update API
         uses: appleboy/ssh-action@master
@@ -37,7 +37,6 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           script: |
             cd ~/app/pokedex/backend
-            git pull origin main
             docker-compose build --no-cache --force-rm
             docker-compose up -d
             docker image prune -a -f
