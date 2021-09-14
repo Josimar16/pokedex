@@ -9,7 +9,7 @@ export function Logo() {
             width="64"
         >
             pokedex
-            <Text as="span" marginLeft="1" color="green.500">
+            <Text as="span" marginLeft="1" color="red.500">
                 *
             </Text>
         </Text>

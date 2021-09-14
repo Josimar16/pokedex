@@ -62,7 +62,7 @@ export default function SignIn() {
                         marginY="1.5rem"
                     >
                         Saiba mais sobre os
-                        <Text color="green.500">Pokémon</Text>
+                        <Text color="red.500">Pokémon</Text>
                         durante sua viagem.
                     </Text>
 
@@ -80,15 +80,14 @@ export default function SignIn() {
                         <Button
                             title="Ver demonstração"
                             mt="2.5rem"
-                            bgColor="green.400"
-                            color="gray.900"
+                            bgColor="red.400"
                         />
                         <Button
                             title="Ir para a home"
                             variant="outline"
                             mt="2.5rem"
                             border="2px"
-                            borderColor="green.400"
+                            borderColor="red.400"
                         />
                     </Flex>
                 </Box>
@@ -124,7 +123,7 @@ export default function SignIn() {
                         />
 
                         <Checkbox
-                            colorScheme="green"
+                            colorScheme="red"
                             color="gray.200"
                         >
                             <TextLink title="Mostrar senha" />
@@ -136,7 +135,7 @@ export default function SignIn() {
                     <ChakraButton
                         type="submit"
                         marginTop="6"
-                        colorScheme="green"
+                        colorScheme="red"
                         size="lg"
                         isLoading={formState.isSubmitting}
                     >
