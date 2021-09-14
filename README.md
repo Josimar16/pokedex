@@ -10,7 +10,7 @@
 
 **_Tela de register_**
 
-[ ] Deve ser possivel registar-se usando email/senha
+[x] Deve ser possivel registar-se usando email/senha
 
 [ ] Deve ser possível registar-se usando login social - github
 
