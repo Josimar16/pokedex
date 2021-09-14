@@ -51,10 +51,10 @@ export default function SignUp() {
                 <Flex
                     as="form"
                     width="100%"
-                    maxWidth={360}
+                    maxWidth="360"
                     bg="gray.800"
                     p="8"
-                    borderBottomRadius={8}
+                    borderBottomRadius="8"
                     flexDirection="column"
                     onSubmit={handleSubmit(handleSignUp)}
                 >
@@ -118,7 +118,7 @@ export default function SignUp() {
                         opacity="0.5"
                         color="gray.50"
                     >
-                        Entre conosco nessa e seja o "treinador"<br />
+                        Entre conosco nessa e seja o treinador<br />
                         de um Pokémon, isso se ele gostar<br />
                         de você, vale a pena correr o risco. 💨 🚀
                     </Text>
