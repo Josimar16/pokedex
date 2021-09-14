@@ -1,42 +1,11 @@
 version: '3.7'
 
 services:
-  postgres:
-    container_name: pokedex-postgres
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: "postgres"
-    ports:
-      - "5432:5432"
-    volumes:
-      - ~/PostgreSQL:/var/lib/postgresql/data
-    expose:
-      - "5432"
-    networks:
-      - pokedex-network
-
-  pgadmin:
-    container_name: pokedex-pgadmin
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "pokedex@gmail.com"
-      PGADMIN_DEFAULT_PASSWORD: "pokedex-pass"
-    ports:
-      - "9000:80"
-    depends_on:
-      - postgres
-    networks:
-      - pokedex-network
-
-  backend:
+  server:
     build: ./backend
     image: pokedex/backend
     container_name: pokedex-backend
     restart: always
-    depends_on:
-      - postgres
     environment:
       - APP_PORT=3333      
       - DATABASE_PORT=5432
@@ -47,7 +16,6 @@ services:
     expose:
       - "3333"
     networks:
-      - pokedex-network
       - proxy
     labels:
       - "traefik.enable=true"
@@ -57,10 +25,3 @@ services:
       - "traefik.http.routers.a2server.tls.certresolver=cti-ssl-resolver"
       - "traefik.http.routers.a2server.service=a2server"
       - "traefik.http.services.a2server.loadbalancer.server.port=3333"
-
-networks:
-  pokedex-network:
-    name: pokedex-network
-  proxy:
-    external: 
-      name: proxy
