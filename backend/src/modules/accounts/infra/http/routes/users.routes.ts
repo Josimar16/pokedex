@@ -1,4 +1,4 @@
-import {Controller, Post, Req} from "@nestjs/common";
+import {Controller, Get, Post, Req} from "@nestjs/common";
 import {AppResponse} from "../../../../../shared/responses/AppResponse";
 import {CreateUserController} from "../../../useCases/createUser/createUserController";
 
@@ -11,5 +11,10 @@ export class UsersRoutes {
     @Post()
     public async create(@Req() request): Promise<AppResponse> {
         return this.createUserController.handle(request);
+    }
+
+    @Get()
+    public async index(): Promise<string> {
+        return "Hello World";
     }
 }
