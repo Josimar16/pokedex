@@ -1,4 +1,8 @@
-version: '3.7'
+version: "3.7"
+
+networks:
+  proxy:
+    external: true
 
 services:
   server:
@@ -7,7 +11,7 @@ services:
     container_name: pokedex-backend
     restart: always
     environment:
-      - APP_PORT=3333      
+      - APP_PORT=3333
       - DATABASE_PORT=5432
       - DATABASE_HOST=postgres
       - DATABASE_USERNAME=pokedex-user
@@ -20,8 +24,8 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"
-      - "traefik.http.routers.a2server.rule=Host(`app-32824.nuvem-us-04.absamcloud.com`) && PathPrefix(`/pokedex/api`)"
-      - "traefik.http.routers.a2server.entrypoints=websecure"
-      - "traefik.http.routers.a2server.tls.certresolver=cti-ssl-resolver"
-      - "traefik.http.routers.a2server.service=a2server"
-      - "traefik.http.services.a2server.loadbalancer.server.port=3333"
+      - "traefik.http.routers.pokedexserver.rule=Host(`app-32824.nuvem-us-04.absamcloud.com`) && PathPrefix(`/pokedex/api`)"
+      - "traefik.http.routers.pokedexserver.entrypoints=websecure"
+      - "traefik.http.routers.pokedexserver.tls.certresolver=cti-ssl-resolver"
+      - "traefik.http.routers.pokedexserver.service=pokedexserver"
+      - "traefik.http.services.pokedexserver.loadbalancer.server.port=3333"
