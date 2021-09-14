@@ -26,6 +26,6 @@ services:
       - "traefik.docker.network=proxy"
       - "traefik.http.routers.pokedexserver.rule=Host(`app.development.tec.br`) && PathPrefix(`/pokedex/api`)"
       - "traefik.http.routers.pokedexserver.entrypoints=websecure"
-      - "traefik.http.routers.pokedexserver.tls.certresolver=cti-ssl-resolver"
+      - "traefik.http.routers.pokedexserver.tls.certresolver=certificado-ssl"
       - "traefik.http.routers.pokedexserver.service=pokedexserver"
       - "traefik.http.services.pokedexserver.loadbalancer.server.port=3333"
