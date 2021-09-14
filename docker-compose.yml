@@ -24,7 +24,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"
-      - "traefik.http.routers.pokedexserver.rule=Host(`app-32824.nuvem-us-04.absamcloud.com`) && PathPrefix(`/pokedex/api`)"
+      - "traefik.http.routers.pokedexserver.rule=Host(`app.development.tec.br`) && PathPrefix(`/pokedex/api`)"
       - "traefik.http.routers.pokedexserver.entrypoints=websecure"
       - "traefik.http.routers.pokedexserver.tls.certresolver=cti-ssl-resolver"
       - "traefik.http.routers.pokedexserver.service=pokedexserver"
